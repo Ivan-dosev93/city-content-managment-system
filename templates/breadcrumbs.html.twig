@@ -1,0 +1,13 @@
+<hr>
+<nav aria-label="breadcrumb" style="margin: 30px 0 30px 50px">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ path('index') }}">Начало</a></li>
+        {% for breadcrumb in getBreadcrumbs() %}
+            <li class="breadcrumb-item">{% if breadcrumb.route %} <a
+                        href="{{ breadcrumb.route }}">{% endif %}
+                    {{ breadcrumb.text }}{% if breadcrumb.route %}</a>{% endif %}
+            </li>
+        {% endfor %}
+    </ol>
+</nav>
+<hr>

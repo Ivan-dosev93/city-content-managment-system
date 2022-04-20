@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Град Долна Оряховица - {{ category.name }}{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="container marketing">
+            {% include 'breadcrumbs.html.twig' %}
+            <h2 class="featurette-heading text-center">{{ category.name }}</h2>
+            <br/>
+            <span class="text-center">{{ category.description|raw }}</span>
+
+            <hr class="featurette-divider">
+
+            {% include 'blog/blog_post_list_template.html.twig' with {'posts': posts} %}
+        </div>
+    </main>
+{% endblock %}

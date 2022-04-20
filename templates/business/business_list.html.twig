@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Град Долна Оряховица - Бизнеси{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="container marketing">
+            {% include 'breadcrumbs.html.twig' %}
+            <h2 class="featurette-heading text-center">Бизнеси</h2>
+            <br/>
+            <span class="text-center">Тук може да намерите информация за бизнесите в Долна Оряховица</span>
+
+            <hr class="featurette-divider">
+
+            {% include 'business/list_template.html.twig' with {'businesses': businesses} %}
+        </div>
+    </main>
+{% endblock %}

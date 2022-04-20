@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Град Долна Оряховица{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="container marketing">
+            {% include 'breadcrumbs.html.twig' %}
+            <div class="row featurette">
+                {% if business.thumbnail is not null %}
+                    <img src="{{ getImageUrl(business.thumbnail) }}">
+                {% endif %}
+                <h2 class="featurette-heading">{{ business.name }}</h2>
+                <p>Създадено от: <b>{{ business.updatedBy.nickname }}</b> на:
+                    <b>{{ business.updatedAt|date('d-m-Y H:i:s') }}</b></p>
+                {% if business.googleMapIframe is not null %}
+                    {{ business.googleMapIframe|raw }}
+                {% endif %}
+                <p class="lead">{{ business.text|raw }}</p>
+                {% if business.thumbnail1 is not null %}
+                    <img src="{{ getImageUrl(business.thumbnail1) }}">
+                {% endif %}
+                {% if business.thumbnail2 is not null %}
+                    <img src="{{ getImageUrl(business.thumbnail2) }}">
+                {% endif %}
+                {% if business.thumbnail3 is not null %}
+                    <img src="{{ getImageUrl(business.thumbnail3) }}">
+                {% endif %}
+                {% if business.thumbnail4 is not null %}
+                    <img src="{{ getImageUrl(business.thumbnail4) }}">
+                {% endif %}
+            </div>
+        </div>
+    </main>
+{% endblock %}

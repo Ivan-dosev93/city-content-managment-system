@@ -1,0 +1,25 @@
+{% for business in businesses %}
+    <div class="row featurette">
+        <div class="col-md-7
+{#{% if loop.index%2 == 0 %} order-md-2{% endif %}#}
+">
+            <h2>{{ business.name }}</h2>
+            <p>Създадено от: <b>{{ business.updatedBy.nickname }}</b> на:
+                <b>{{ business.updatedAt|date('d-m-Y H:i:s') }}</b></p>
+            <p class="lead">{{ business.text|slice(0,255)|striptags }}  </p>
+            <a href="{{ path('business_view', {'slug': business.slug}) }}">Виж още</a>
+        </div>
+        <div class="col-md-5
+{#{% if loop.index%2 == 0 %} order-md-1{% endif %}#}
+">
+            <img width="500" src="{{ getImageUrl(business.thumbnail) }}">
+        </div>
+    </div>
+
+    {% if loop.index != loop.last %}
+        <hr class="featurette-divider">
+    {% endif %}
+{% else %}
+    <p class="text-center">Няма налични бизнеси.</p>
+    <hr class="featurette-divider">
+{% endfor %}

@@ -1,0 +1,23 @@
+{% for post in posts %}
+    <div class="row featurette">
+        <div class="col-md-7
+{#{% if loop.index%2 == 0 %} order-md-2{% endif %}#}
+">
+            <h2>{{ post.title }}</h2>
+            <p>Създадено от: <b>{{ post.updatedBy.nickname }}</b> на:
+                <b>{{ post.updatedAt|date('d-m-Y H:i:s') }}</b></p>
+            <p class="lead">{{ post.text|slice(0,255)|striptags }}  </p>
+            <a href="{{ path('blog_post_view', {'category':post.category.slug, 'post': post.slug}) }}">Виж още</a>
+        </div>
+        <div class="col-md-5
+{#{% if loop.index%2 == 0 %} order-md-1{% endif %}#}
+">
+            <img width="500" src="{{ getImageUrl(post.thumbnail) }}">
+        </div>
+    </div>
+
+    <hr class="featurette-divider">
+{% else %}
+    <p class="text-center">Няма налични блог постове.</p>
+    <hr class="featurette-divider">
+{% endfor %}

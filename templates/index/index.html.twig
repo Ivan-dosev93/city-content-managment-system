@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Град Долна Оряховица{% endblock %}
+
+{% block body %}
+    <main>
+        <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+            {% if sliderItems|length > 1 %}
+                <div class="carousel-indicators">
+                    {% for item in sliderItems %}
+                        <button type="button" data-bs-target="#myCarousel"
+                                data-bs-slide-to="{{ loop.index-1 }}" {% if loop.index == 1 %} class="active"
+                            aria-current="true" {% endif %}
+                                aria-label="Slide {{ loop.index }}"></button>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <div class="carousel-inner">
+                {% for item in sliderItems %}
+                    <div class="carousel-item {% if loop.index == 1 %} active {% endif %}">
+                        <img src="{{ getImageUrl(item.thumbnail) }}"/>
+                        <div class="container">
+                            <div class="carousel-caption text-start">
+                                <h1>{{ item.heading|default("") }}</h1>
+                                <p>{{ item.description|default("")|raw }}</p>
+                                {% if item.url is not null and item.url != getBaseUrl() %}
+                                    <p><a class="btn btn-lg btn-primary" target="_blank"
+                                          href="{{ item.url|default("") }}">{{ item.urlText|default("Продължи") }}</a>
+                                    </p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            {% if sliderItems|length > 1 %}
+                <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            {% endif %}
+        </div>
+
+        <div class="container marketing">
+            {% if posts|length > 0 %}
+                <h1> Последно добавена информация </h1>
+                <hr class="featurette-divider">
+                {% include 'blog/blog_post_list_template.html.twig' with {'posts': posts} %}
+            {% endif %}
+
+            {% if businesses|length > 0 %}
+                <h1> Бизнеси в Долна Оряховица </h1>
+                <hr class="featurette-divider">
+                {% include 'business/list_template.html.twig' with {'businesses': businesses} %}
+            {% endif %}
+        </div>
+
+
+        <!-- FOOTER -->
+
+    </main>
+{% endblock %}

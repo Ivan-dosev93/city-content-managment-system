@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="icon"
+          href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+    {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+</head>
+<body>
+<header>
+
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="container-fluid">
+            <img width="65px" src="{{ asset('build/images/GerbDolnaOryahovitsa.png') }}"> <a class="navbar-brand"
+                                                                                             href="{{ path('index') }}">Град
+                Долна Оряховица</a>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0 d-flex" style="margin: 0 auto; padding: 5px;">
+                    {% for item in getMegaMenuItems() %}
+                        {% if item.activeHeaderMenuItems|length > 0 %}
+                            <li class="nav-item dropdown">
+                                <i class="fa {{ item.faIcon }}
+                                    {% for childItem in item.headerMenuItems %}
+                                        {% if app.request.uri == childItem.url %} i-active {% endif %}
+                                    {% endfor %}
+                                "></i>
+                                <a class="nav-link dropdown-toggle
+                                    {% for childItem in item.activeHeaderMenuItems %}
+                                        {% if app.request.uri == childItem.url %} active {% endif %}
+                                    {% endfor %}"
+                                   aria-current="page" data-bs-toggle="dropdown"
+                                   href="{{ item.url }}">{{ item.urlText }}</a>
+                                <ul class="dropdown-menu">
+                                    {% for childItem in item.activeHeaderMenuItems %}
+                                        <li><a class="dropdown-item"
+                                               href="{{ childItem.url }}">{{ childItem.urlText }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                        {% elseif item.parent is null %}
+                            <li class="nav-item">
+                                <i class="fa {{ item.faIcon }} {% if app.request.uri == item.url %}  i-active {% endif %}"></i>
+                                <a class="nav-link {% if app.request.uri == item.url %} active {% endif %}"
+                                   aria-current="page" href="{{ item.url }}">{{ item.urlText }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+{% block body %}{% endblock %}
+<hr class="featurette-divider">
+<footer class="container">
+    <p class="float-end"><a href="#">Back to top</a></p>
+    <p>&copy; 2022 Изработено за град Долна Оряховица от Иван Бориславов Досев.</p>
+</footer>
+</body>
+</html>

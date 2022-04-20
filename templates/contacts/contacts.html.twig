@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Град Долна Оряховица - Контакти{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="container marketing">
+            {% include 'breadcrumbs.html.twig' %}
+            <div class="row featurette d-flex align-items-center justify-content-center">
+                <div class="col-md-9">
+                    <h1 class="h3 text-center">Изпращане на {{ contactType }}</h1>
+                    <hr>
+                    {% include 'flash_messages.html.twig' %}
+                    {{ form_start(form) }}
+                    {{ form_row(form.names) }}<br />
+                    {{ form_row(form.email) }}<br />
+                    {{ form_row(form.title) }}<br />
+                    {{ form_row(form.description) }}<br />
+{#                    {{ form_row(form.contactType) }}<br />#}
+                    {{ form_row(form.thumbnailFile) }}<br />
+                    {{ form_row(form.submit) }}
+                    {{ form_end(form) }}
+                </div>
+
+            </div>
+
+            <hr class="featurette-divider">
+        </div>
+    </main>
+{% endblock %}

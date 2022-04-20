@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Град Долна Оряховица{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="container marketing">
+            {% include 'breadcrumbs.html.twig' %}
+            <div class="row featurette">
+                <img src="{{ getImageUrl(post.thumbnail) }}">
+                <h2 class="featurette-heading">{{ post.title }}</h2>
+                <p>Създадено от: <b>{{ post.updatedBy.nickname }}</b> на: <b>{{ post.updatedAt|date('d-m-Y H:i:s')  }}</b></p>
+                <p class="lead">{{ post.text|raw }}</p>
+            </div>
+        </div>
+    </main>
+{% endblock %}
