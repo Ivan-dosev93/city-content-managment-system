@@ -123,6 +123,8 @@ class HeaderMenuItem
 
     public function __toString(): ?string
     {
-        return $this->getUrlText();
+        if($this->getUrlText())
+            return $this->getUrlText();
+        return "";
     }
 }
